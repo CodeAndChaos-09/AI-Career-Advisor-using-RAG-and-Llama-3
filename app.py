@@ -36,8 +36,8 @@ def load_models():
     )
 
     Settings.llm = Groq(
-        model="llama-3.1-8b-instant",
-        api_key=api_key
+        model="llama-2.7b-instant",
+        api_key=os.environ["GROQ_API_KEY"]
     )
 
 load_models()
