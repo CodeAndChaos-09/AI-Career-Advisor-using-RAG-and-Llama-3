@@ -1,23 +1,21 @@
 from llama_index.core import Settings
 
+
 def rewrite_query(user_query: str) -> str:
     """
-    Uses the LLM to rewrite the user query into a more
-    specific search query for retrieval.
+    Uses the configured LLM (Groq Llama-3) to rewrite the query
+    for better retrieval.
     """
 
     prompt = f"""
-You are an AI assistant helping improve search queries.
+Rewrite the following user question to be clearer and optimized
+for retrieving information from a knowledge base.
 
-Rewrite the user's question so it becomes a clearer
-and more detailed query for retrieving career information.
+Question: {user_query}
 
-User Question:
-{user_query}
-
-Improved Query:
+Rewritten question:
 """
 
     response = Settings.llm.complete(prompt)
 
-    return response.text.strip()
+    return str(response).strip()
