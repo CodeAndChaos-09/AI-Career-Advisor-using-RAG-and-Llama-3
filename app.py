@@ -1,6 +1,7 @@
 import streamlit as st
 import os
-
+os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+st.write("API KEY LOADED:", bool(os.getenv("GROQ_API_KEY")))
 from llama_index.core import (
     StorageContext,
     load_index_from_storage,
@@ -12,7 +13,7 @@ from llama_index.core import (
 from llama_index.llms.groq import Groq
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-from retrieval.query_rewriter import rewrite_query
+from query_rewriter import rewrite_query
 
 
 st.set_page_config(page_title="AI Career Advisor", page_icon="🎓")
