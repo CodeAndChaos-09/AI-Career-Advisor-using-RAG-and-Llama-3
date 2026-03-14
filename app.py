@@ -12,7 +12,7 @@ from llama_index.core import (
 from llama_index.llms.groq import Groq
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
-from query_rewriter import rewrite_query
+from retrieval.query_rewriter import rewrite_query
 
 
 st.set_page_config(page_title="AI Career Advisor", page_icon="🎓")
