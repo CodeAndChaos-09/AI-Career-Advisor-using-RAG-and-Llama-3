@@ -1,7 +1,6 @@
 import streamlit as st
 import os
 os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
-st.write("API KEY LOADED:", bool(os.getenv("GROQ_API_KEY")))
 from llama_index.core import (
     StorageContext,
     load_index_from_storage,
