@@ -5,6 +5,7 @@ import os
 try:
     api_key = st.secrets["GROQ_API_KEY"]
     os.environ["GROQ_API_KEY"] = api_key
+    st.success(f"✅ API key loaded: {api_key[:10]}...")
 except KeyError:
     st.error("GROQ_API_KEY not found in Streamlit secrets. Please configure it in your Streamlit dashboard.")
     st.stop()
