@@ -1,6 +1,14 @@
 import streamlit as st
 import os
-os.environ["GROQ_API_KEY"] = st.secrets["GROQ_API_KEY"]
+
+# Check if API key is available
+try:
+    api_key = st.secrets["GROQ_API_KEY"]
+    os.environ["GROQ_API_KEY"] = api_key
+except KeyError:
+    st.error("GROQ_API_KEY not found in Streamlit secrets. Please configure it in your Streamlit dashboard.")
+    st.stop()
+
 from llama_index.core import (
     StorageContext,
     load_index_from_storage,
@@ -16,16 +24,12 @@ from retrieval.query_rewriter import rewrite_query
 
 
 st.set_page_config(page_title="AI Career Advisor", page_icon="🎓")
-
 st.title("🎓 AI Career Advisor")
 st.write("Ask questions about tech careers, skills and learning paths.")
-
 
 # Load models
 @st.cache_resource
 def load_models():
-
-    api_key = st.secrets["GROQ_API_KEY"]
 
     Settings.embed_model = HuggingFaceEmbedding(
         model_name="sentence-transformers/all-MiniLM-L6-v2"
@@ -90,12 +94,13 @@ if prompt:
         st.markdown(prompt)
 
     with st.spinner("Thinking..."):
-
-        rewritten_query = rewrite_query(prompt)
-
-        response = query_engine.query(rewritten_query)
-
-        answer = str(response)
+        try:
+            rewritten_query = rewrite_query(prompt)
+            response = query_engine.query(rewritten_query)
+            answer = str(response)
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
+            answer = "Sorry, I encountered an error while processing your request. Please try again."
 
     with st.chat_message("assistant"):
         st.markdown(answer)
@@ -103,3 +108,4 @@ if prompt:
     st.session_state.messages.append(
         {"role": "assistant", "content": answer}
     )
+    
