@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+api_key = st.secrets["GROQ_API_KEY"]
 from dotenv import load_dotenv
 
 from llama_index.core import (
@@ -29,15 +30,17 @@ st.write("Ask questions about tech careers, skills and learning paths.")
 @st.cache_resource
 def load_models():
 
+    api_key = st.secrets["GROQ_API_KEY"]
+
     Settings.embed_model = OpenAIEmbedding(
         model="text-embedding-3-small",
-        api_key=os.getenv("GROQ_API_KEY"),
+        api_key=api_key,
         api_base="https://api.groq.com/openai/v1"
     )
 
     Settings.llm = Groq(
         model="llama-3.1-8b-instant",
-        api_key=os.getenv("GROQ_API_KEY")
+        api_key=api_key
     )
 
 load_models()
