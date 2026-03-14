@@ -1,7 +1,5 @@
 import streamlit as st
 import os
-api_key = st.secrets["GROQ_API_KEY"]
-from dotenv import load_dotenv
 
 from llama_index.core import (
     StorageContext,
@@ -12,32 +10,37 @@ from llama_index.core import (
 )
 
 from llama_index.llms.groq import Groq
-from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 from retrieval.query_rewriter import rewrite_query
 
-load_dotenv()
 
-st.set_page_config(page_title="AI Career Advisor", page_icon="🎓")
+# -----------------------------
+# Streamlit Page Config
+# -----------------------------
+st.set_page_config(
+    page_title="AI Career Advisor",
+    page_icon="🎓",
+)
 
 st.title("🎓 AI Career Advisor")
-st.write("Ask questions about tech careers, skills and learning paths.")
+st.write("Ask questions about tech careers, skills, and learning paths.")
 
-# -----------------------
-# Load Models
-# -----------------------
 
+# -----------------------------
+# Load Models (cached)
+# -----------------------------
 @st.cache_resource
 def load_models():
 
     api_key = st.secrets["GROQ_API_KEY"]
 
-    Settings.embed_model = OpenAIEmbedding(
-        model="text-embedding-3-small",
-        api_key=api_key,
-        api_base="https://api.groq.com/openai/v1"
+    # Embedding model
+    Settings.embed_model = HuggingFaceEmbedding(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
+    # Llama-3 via Groq
     Settings.llm = Groq(
         model="llama-3.1-8b-instant",
         api_key=api_key
@@ -45,16 +48,18 @@ def load_models():
 
 load_models()
 
-# -----------------------
-# Load or Build Index
-# -----------------------
 
+# -----------------------------
+# Load or Build Vector Index
+# -----------------------------
 @st.cache_resource
 def load_index():
 
     PERSIST_DIR = "storage"
 
     if not os.path.exists(PERSIST_DIR):
+
+        st.info("Building vector index for the first time...")
 
         documents = SimpleDirectoryReader("data/career").load_data()
 
@@ -77,10 +82,10 @@ index = load_index()
 
 query_engine = index.as_query_engine(similarity_top_k=3)
 
-# -----------------------
-# Chat UI
-# -----------------------
 
+# -----------------------------
+# Chat History
+# -----------------------------
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
@@ -89,6 +94,10 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+
+# -----------------------------
+# Chat Input
+# -----------------------------
 prompt = st.chat_input("Ask a career question")
 
 if prompt:
