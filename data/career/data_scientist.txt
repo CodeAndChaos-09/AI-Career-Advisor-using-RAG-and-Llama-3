@@ -1,0 +1,17 @@
+Data Scientist
+
+Responsibilities:
+- Analyze large datasets
+- Build predictive models
+
+Skills:
+- Python
+- Statistics
+- Machine Learning
+- SQL
+
+Tools:
+- Python
+- Pandas
+- Scikit-learn
+- Jupyter

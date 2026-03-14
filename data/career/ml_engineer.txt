@@ -1,0 +1,20 @@
+Responsibilities:
+- Develop and train machine learning models
+- Prepare and process datasets for model training
+- Deploy machine learning models into production
+- Monitor and improve model performance
+- Collaborate with data scientists and engineers to build ML systems
+
+Skills:
+- Python
+- Machine Learning
+- Deep Learning
+- Data Preprocessing
+- Model Evaluation
+
+Tools:
+- Python
+- Scikit-learn
+- TensorFlow / PyTorch
+- Pandas
+- Jupyter

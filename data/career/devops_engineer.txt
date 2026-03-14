@@ -1,0 +1,20 @@
+Responsibilities:
+- Build and manage CI/CD pipelines
+- Automate infrastructure and deployment processes
+- Monitor system performance and reliability
+- Manage cloud infrastructure and services
+- Improve system scalability, security, and availability
+
+Skills:
+- Linux
+- Cloud Computing
+- Automation
+- Containerization
+- Networking
+
+Tools:
+- Docker
+- Kubernetes
+- Jenkins
+- AWS / Azure / GCP
+- Git

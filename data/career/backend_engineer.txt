@@ -1,0 +1,20 @@
+Responsibilities:
+- Design and develop server-side applications
+- Build and maintain APIs and backend services
+- Manage and optimize databases
+- Implement authentication and security mechanisms
+- Ensure scalability, performance, and reliability of backend systems
+
+Skills:
+- Python
+- RESTful APIs
+- Database Management
+- Data Structures and Algorithms
+- System Design
+
+Tools:
+- Python
+- Node.js
+- Django / Flask
+- MySQL / MongoDB
+- Git

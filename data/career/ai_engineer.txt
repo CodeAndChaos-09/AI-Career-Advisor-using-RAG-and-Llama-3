@@ -1,0 +1,21 @@
+Responsibilities:
+- Design and develop AI and machine learning models
+- Build and deploy AI-powered applications
+- Integrate machine learning models into production systems
+- Optimize models for performance and scalability
+- Work with large datasets for training and evaluation
+
+Skills:
+- Python
+- Machine Learning
+- Deep Learning
+- Natural Language Processing (NLP)
+- Data Structures and Algorithms
+
+Tools:
+- Python
+- TensorFlow
+- PyTorch
+- Hugging Face
+- LangChain
+- Jupyter
